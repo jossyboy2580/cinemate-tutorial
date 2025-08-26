@@ -7,11 +7,12 @@ import useUpdatePageTitle from '../hooks/useUpdatePageTitle';
 export default function MovieDetail() {
   const params = useParams();
   const [movie, setMovie] = useState({});
+  const api_key = import.meta.env.VITE_API_KEY;
   const image = movie.poster_path ? `https://image.tmdb.org/t/p/w500/${movie.poster_path}` : backupImage;
   
   useEffect(() => {
     async function fetchMovie() {
-      const response = await fetch(`https://api.themoviedb.org/3/movie/${params.id}?api_key=febf3cfd6a3b835de5a1cd5570e9119a`);
+      const response = await fetch(`https://api.themoviedb.org/3/movie/${params.id}?api_key=${api_key}`);
       const json = await response.json();
       setMovie(json);
     }
